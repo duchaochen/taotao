@@ -17,6 +17,11 @@
     <dependencies>
         <dependency>
             <groupId>com.taotao</groupId>
+            <artifactId>taotao-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.taotao</groupId>
             <artifactId>taotao-manager-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -93,8 +98,9 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <configuration>
-                    <port>8081</port>
                     <path>/</path>
+                    <port>8081</port>
+                    <uriEncoding>UTF-8</uriEncoding>
                 </configuration>
             </plugin>
         </plugins>
