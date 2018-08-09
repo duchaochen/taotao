@@ -11,6 +11,6 @@
        
 1.开启zookeeper端口2181步骤：
 
-    /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT   写入修改
+    /sbin/iptables -I INPUT -p tcp --dport 2181 -j ACCEPT   写入修改
     /etc/init.d/iptables save   保存修改
     service iptables restart    重启防火墙，修改生效
