@@ -22,13 +22,16 @@
             <property name="suffix" value=".jsp"/>
         </bean>
 
-        <!-- 提供方应用信息，用于计算依赖关系 -->
-        <dubbo:application name="taotao-manager-web" />
-        <!-- 注册中心的地址 -->
-        <dubbo:registry protocol="zookeeper" address="192.168.25.136:2181" />
-        <!-- 用dubbo协议在20880端口暴露服务 -->
-        <dubbo:protocol name="dubbo" port="20880" />
-        <!-- 声明需要暴露的服务接口 -->
-        <dubbo:reference interface="com.taotao.service.ItemService" id="itemService"/>
+        <!--&lt;!&ndash; 引用dubbo服务 &ndash;&gt;-->
+        <!--<dubbo:application name="taotao-manager-web" />-->
+        <!--&lt;!&ndash; 注册中心的地址 &ndash;&gt;-->
+        <!--<dubbo:registry protocol="zookeeper" address="192.168.25.136:2181" />-->
+        <!--&lt;!&ndash; 声明需要暴露的服务接口 &ndash;&gt;-->
+        <!--<dubbo:reference interface="com.taotao.service.ItemService" id="itemService"/>-->
+
+    <!-- 引用dubbo服务 -->
+    <dubbo:application name="taotao-manager-web"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.136:2181"/>
+    <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" />
 
 </beans>
