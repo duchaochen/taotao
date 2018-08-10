@@ -18,16 +18,13 @@
         <context:component-scan base-package="com.taotao.controller"/>
 
         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-            <property name="prefix" value="/WEB-INF/jsps/"/>
+            <property name="prefix" value="/WEB-INF/jsp/"/>
             <property name="suffix" value=".jsp"/>
         </bean>
 
-        <!--&lt;!&ndash; 引用dubbo服务 &ndash;&gt;-->
-        <!--<dubbo:application name="taotao-manager-web" />-->
-        <!--&lt;!&ndash; 注册中心的地址 &ndash;&gt;-->
-        <!--<dubbo:registry protocol="zookeeper" address="192.168.25.136:2181" />-->
-        <!--&lt;!&ndash; 声明需要暴露的服务接口 &ndash;&gt;-->
-        <!--<dubbo:reference interface="com.taotao.service.ItemService" id="itemService"/>-->
+    <!--配置资源映射-->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
 
     <!-- 引用dubbo服务 -->
     <dubbo:application name="taotao-manager-web"/>
