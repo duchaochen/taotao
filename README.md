@@ -15,5 +15,10 @@
     /etc/init.d/iptables save   保存修改
     service iptables restart    重启防火墙，修改生效
     
-第二个问题就是把注册zookeeper的ip地址一定要输入正确，这个问题一般不会出现
+第二个问题：
+    就是把注册zookeeper的ip地址一定要输入正确，这个问题一般不会出现
 由于我在家和公司的zookeeper的注册ip地址不同所以导致出现的这个问题。
+
+第三个问题：
+        当使用idea上的maven的install命令安装时，控制台出现中文乱码时，
+        需要在settings -> maven -> Runner的 VM options设置一下字符编码 -Dfile.encoding=GBK
