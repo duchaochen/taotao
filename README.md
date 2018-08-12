@@ -22,3 +22,5 @@
 第三个问题：
         当使用idea上的maven的install命令安装时，控制台出现中文乱码时，
         需要在settings -> maven -> Runner的 VM options设置一下字符编码 -Dfile.encoding=GBK
+第四个问题：
+        文件服务器fsatDFS复制到虚拟机之后开启直接查看ip之后，代码链接的时候对应上ip就可以使用了。而不是视频中说的ip是133。

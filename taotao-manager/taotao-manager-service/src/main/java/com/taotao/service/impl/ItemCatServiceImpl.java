@@ -1,6 +1,6 @@
 package com.taotao.service.impl;
 
-import com.taotao.common.EasyUITreeNode;
+import com.taotao.common.pojo.EasyUITreeNode;
 import com.taotao.mapper.TbItemCatMapper;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemCatExample.Criteria;

@@ -13,6 +13,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+        <!--读取资源文件-->
+        <context:property-placeholder location="classpath:resource/resource.properties"/>
+
         <mvc:annotation-driven/>
 
         <context:component-scan base-package="com.taotao.controller"/>
@@ -22,13 +25,28 @@
             <property name="suffix" value=".jsp"/>
         </bean>
 
-    <!--配置资源映射-->
+    <!--
+    配置资源映射,这个映射是可以映射本地资源的，
+    而<mvc:default-servlet-handler/>是将springmvc不能处理的请求交给tomcat
+    -->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>
 
+    <!--多媒体文件上传解析器-->
+    <!--因为这个类id被kaoid 做的依赖注入，所以必须写id=multipartResolver-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置文件默认编码-->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!--设置文件上传大小5M, 5*1024*1024-->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+
     <!-- 引用dubbo服务 -->
     <dubbo:application name="taotao-manager-web"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.25.136:2181"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.144:2181"/>
     <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" />
+    <dubbo:reference interface="com.taotao.service.ItemCatService" id="itemCatService" />
+    <dubbo:reference interface="com.taotao.content.service.ContentCategoryService" id="contentCategoryService" />
 
 </beans>
