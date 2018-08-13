@@ -25,8 +25,9 @@
             <property name="suffix" value=".jsp"/>
         </bean>
 
-    <!--&lt;!&ndash; 引用dubbo服务 &ndash;&gt;-->
-    <!--<dubbo:application name="taotao-portal-web"/>-->
-    <!--<dubbo:registry protocol="zookeeper" address="192.168.25.144:2181"/>-->
-    <!--<dubbo:reference interface="com.taotao.service.ItemService" id="itemService" />-->
+    <!-- 引用dubbo服务 -->
+    <dubbo:application name="taotao-portal-web"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.136:2181"/>
+    <dubbo:reference interface="com.taotao.content.service.ContentService" id="contentService" />
+
 </beans>

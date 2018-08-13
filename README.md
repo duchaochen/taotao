@@ -24,3 +24,23 @@
         需要在settings -> maven -> Runner的 VM options设置一下字符编码 -Dfile.encoding=GBK
 第四个问题：
         文件服务器fsatDFS复制到虚拟机之后开启直接查看ip之后，代码链接的时候对应上ip就可以使用了。而不是视频中说的ip是133。
+        
+第五个问题：
+org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 。。。。
+ <resources>
+    <!-- maven项目中src源代码下的xml等资源文件编译进classes文件夹，
+        注意：如果没有这个，它会自动搜索resources下是否有mapper.xml文件，
+        如果没有就会报org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 。。。。-->
+    <resource>
+        <directory>src/main/java</directory>
+        <includes>
+            <include>**/*.xml</include>
+        </includes>
+    </resource>
+    <!--将resources目录下的配置文件编译进classes文件  -->
+    <resource>
+        <directory>src/main/resources</directory>
+    </resource>
+</resources>  
+
+     
