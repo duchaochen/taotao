@@ -29,6 +29,8 @@ public class ContentServiceImpl implements ContentService {
         tbContent.setCreated(new Date());
         tbContent.setUpdated(new Date());
         int insert = contentMapper.insert(tbContent);
+        //添加之后需要删除缓存，让前台查询的时候重新加载缓存就可以显示新的数据了
+        jedisClientPool.hdel("INDEX_CONTENT",tbContent.getCategoryId().toString());
         return TaotaoResult.ok();
     }
 

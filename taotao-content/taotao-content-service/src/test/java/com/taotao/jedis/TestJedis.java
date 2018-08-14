@@ -13,7 +13,7 @@ public class TestJedis {
 
     @Test
     public void test1(){
-        Jedis jedis = new Jedis("192.168.25.138",6379);
+        Jedis jedis = new Jedis("192.168.25.145",6379);
         jedis.set("key1","张三");
 
         System.out.println(jedis.get("key1"));
@@ -21,7 +21,7 @@ public class TestJedis {
     }
     @Test
     public void test2(){
-        JedisPool jedisPool = new JedisPool("192.168.25.138",6379);
+        JedisPool jedisPool = new JedisPool("192.168.25.145",6379);
         Jedis jedis = jedisPool.getResource();
         jedis.set("key1","张三111");
 
