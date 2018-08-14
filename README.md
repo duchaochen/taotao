@@ -27,20 +27,33 @@
         
 第五个问题：
 org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 。。。。
- <resources>
-    <!-- maven项目中src源代码下的xml等资源文件编译进classes文件夹，
-        注意：如果没有这个，它会自动搜索resources下是否有mapper.xml文件，
-        如果没有就会报org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 。。。。-->
-    <resource>
-        <directory>src/main/java</directory>
-        <includes>
-            <include>**/*.xml</include>
-        </includes>
-    </resource>
-    <!--将resources目录下的配置文件编译进classes文件  -->
-    <resource>
-        <directory>src/main/resources</directory>
-    </resource>
-</resources>  
+
+     <resources>
+        <!-- maven项目中src源代码下的xml等资源文件编译进classes文件夹，
+            注意：如果没有这个，它会自动搜索resources下是否有mapper.xml文件，
+            如果没有就会报org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 。。。。-->
+        <resource>
+            <directory>src/main/java</directory>
+            <includes>
+                <include>**/*.xml</include>
+            </includes>
+        </resource>
+        <!--将resources目录下的配置文件编译进classes文件  -->
+        <resource>
+            <directory>src/main/resources</directory>
+        </resource>
+    </resources>  
+
+redis集群关闭防火墙
+查看防火墙状态：
+
+        [root@centos6 ~]# service iptables status
+        iptables：未运行防火墙。
+        
+        开启防火墙：
+        [root@centos6 ~]# service iptables start
+        
+        关闭防火墙：
+        [root@centos6 ~]# service iptables stop
 
      
