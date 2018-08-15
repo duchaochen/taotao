@@ -15,9 +15,18 @@
         <module name="taotao-manager-service" />
         <module name="taotao-manager-web" />
         <module name="taotao-portal-web1" />
+        <module name="taotao-search-service" />
+        <module name="taotao-search-web" />
+      </profile>
+      <profile name="Annotation profile for taotao-search-interface" enabled="true">
+        <sourceOutputDir name="../taota-osearch-interface/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../taota-osearch-interface/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="taotao-search-interface" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="taota-osearch-interface" target="1.7" />
       <module name="taotao-common" target="1.7" />
       <module name="taotao-content" target="1.7" />
       <module name="taotao-content-interface" target="1.7" />
@@ -30,6 +39,10 @@
       <module name="taotao-manager-web" target="1.7" />
       <module name="taotao-parent" target="1.7" />
       <module name="taotao-portal-web1" target="1.7" />
+      <module name="taotao-search" target="1.7" />
+      <module name="taotao-search-interface" target="1.7" />
+      <module name="taotao-search-service" target="1.7" />
+      <module name="taotao-search-web" target="1.7" />
       <module name="taotao-test" target="1.7" />
     </bytecodeTargetLevel>
   </component>
