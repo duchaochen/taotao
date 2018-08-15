@@ -1,7 +1,7 @@
 # taotao
 淘淘商城项目所踩到的坑
 
-#第一个问题：
+#第一个问题：注册dubbo问题
 
     zookeeper的端口没有开放 
     我踩到这个坑了，由于linux系统的命令完全不会，就靠百度，百度之后出来的命令是错误的，结果导致我的端口一直没有开放，最后一直都是启动了tomcat之后访问什么都是404错误，最后百度了好久都是找的关键字是idea启动dubbo项目访问404，结果照做都无法解决问题，最后找了2天都没有找到问题，然后从头一步步的弄，最后还是把端口重新开放一下，测试结果成功了。
@@ -14,6 +14,26 @@
     /sbin/iptables -I INPUT -p tcp --dport 2181 -j ACCEPT   写入修改
     /etc/init.d/iptables save   保存修改
     service iptables restart    重启防火墙，修改生效
+    
+在启动dubbo注册中心出现java.net.UnknownHostException: dubbo:错误解决方案,我的机器名称为dubbo
+    从报错的信息看是没有找到dubbo对应的名称和服务。于是在linux下用hostname命令查看hostname
+    [root@zzyyb /]# hostname
+    dubbo
+    能够正确返回机器的hostname是dubbo说明主机名正确且没有别名。
+
+    接着ping一下这个主机名
+    [root@zzyyb /]# ping dubbo
+    出现这个情况ping: unknown host dubbo
+    就是ping不通，说明主机名没有绑定IP地址。
+
+    vi /etc/hosts 添加正确的主机地址
+    192.168.25.146 dubbo
+    再ping主机可以正常ping通了。
+
+    重启网络服务
+    service network restart
+
+    接着再启动dubbo服务，可以正常启动不报java.net.UnknownHostException 未知的名称或服务的错误了。
     
 #第二个问题：
     `就是把注册zookeeper的ip地址一定要输入正确，这个问题一般不会出现
