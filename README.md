@@ -131,4 +131,6 @@
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <solr> 
     </solr>
+    
+    并且在linux上安装Solr,一切准备就绪的时候报出404错误,此时检查jar包是否导入到了tomcat/webapps/Solr/WEB-INF/lib中,从Solr客户端下面的example/lib/ext之下的所有jar包复制到tomcat根目录的lib文件夹中,也可以复制到tomcat/webapps/Solr/WEB-INF/lib中.特此记录一下
   
