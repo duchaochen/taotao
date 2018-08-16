@@ -1,6 +1,9 @@
 # taotao
 淘淘商城项目所踩到的坑
 
+如果是腾讯云需要安装iptables（已安装忽略），要不然不能使用查看防火墙命令
+yum install iptables-services
+
 #第一个问题：注册dubbo问题
 
     zookeeper的端口没有开放 
