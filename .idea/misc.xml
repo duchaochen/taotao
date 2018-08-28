@@ -13,6 +13,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/taotao-search/taota-osearch-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-search/taotao-search-interface/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

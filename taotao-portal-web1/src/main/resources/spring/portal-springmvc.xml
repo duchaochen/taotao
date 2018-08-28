@@ -27,7 +27,7 @@
 
     <!-- 引用dubbo服务 -->
     <dubbo:application name="taotao-portal-web"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.25.136:2181"/>
+    <dubbo:registry protocol="zookeeper" address="118.25.193.43:2181"/>
     <dubbo:reference interface="com.taotao.content.service.ContentService" id="contentService" />
 
 </beans>
