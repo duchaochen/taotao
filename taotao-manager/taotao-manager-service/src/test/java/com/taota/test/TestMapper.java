@@ -2,12 +2,9 @@ package com.taota.test;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.taotao.mapper.SearchItemMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemExample;
-import com.taotao.service.SearchItemService;
-import com.taotao.service.impl.SearchItemServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -39,19 +36,5 @@ public class TestMapper {
         System.out.println("总页码"+pageInfo.getPages());
         System.out.println("总计路数"+pageInfo.getTotal());
         System.out.println("当前记录数"+pageInfo.getList().size());
-    }
-    @Test
-    public void testSearchMapper() throws IOException {
-        /**
-         * 1.加载spring容器
-         * 2.获取mapper对象
-         * 3.获取数据
-         * 4.封装分页对象
-         */
-        ApplicationContext context = new
-                ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
-        SearchItemService bean = context.getBean(SearchItemService.class);
-        System.out.println(bean.importItemsToIndex());
-
     }
 }

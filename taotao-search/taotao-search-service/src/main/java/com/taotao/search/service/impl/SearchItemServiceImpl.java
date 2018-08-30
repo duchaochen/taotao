@@ -1,9 +1,9 @@
-package com.taotao.service.impl;
+package com.taotao.search.service.impl;
 
 import com.taotao.common.pojo.SearchItem;
 import com.taotao.common.pojo.TaotaoResult;
-import com.taotao.mapper.SearchItemMapper;
-import com.taotao.service.SearchItemService;
+import com.taotao.search.mapper.SearchItemMapper;
+import com.taotao.search.service.SearchItemService;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class SearchItemServiceImpl implements SearchItemService {
 	@Autowired
 	private SearchItemMapper searchItemMapper;
 	@Autowired
-	private SolrServer solrServer;
+	private SolrServer       solrServer;
 
 
 	@Override

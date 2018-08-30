@@ -1,8 +1,10 @@
 package com.taotao.solrj;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.taotao.search.service.SearchItemService;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
@@ -12,9 +14,25 @@ import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.junit.Test;
 
-import com.sun.tools.jdi.VoidTypeImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestSolrJ {
+
+	@Test
+	public void testSearchMapper() throws IOException {
+		/**
+		 * 1.加载spring容器
+		 * 2.获取mapper对象
+		 * 3.获取数据
+		 * 4.封装分页对象
+		 */
+		ApplicationContext context = new
+				ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+		SearchItemService bean = context.getBean(SearchItemService.class);
+		System.out.println(bean.importItemsToIndex());
+
+	}
 
 	@Test
 	public void testAddDocument() throws Exception {

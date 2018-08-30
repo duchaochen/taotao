@@ -30,7 +30,4 @@
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" timeout="300000"/>
     <dubbo:service interface="com.taotao.service.ItemCatService" ref="itemCatServiceImpl" timeout="300000"/>
-    <dubbo:service interface="com.taotao.service.SearchItemService" ref="searchItemServiceImpl" timeout="300000"/>
-
-
 </beans>

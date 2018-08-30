@@ -1,4 +1,4 @@
-package com.taotao.service;
+package com.taotao.search.service;
 
 import com.taotao.common.pojo.TaotaoResult;
 
