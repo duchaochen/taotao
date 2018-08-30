@@ -1,5 +1,7 @@
 # taotao
 淘淘商城项目所踩到的坑
+maven安装命令
+    clean install -Dfile.encoding=UTF-8
 
 如果是腾讯云需要安装iptables（已安装忽略），要不然不能使用查看防火墙命令
 
