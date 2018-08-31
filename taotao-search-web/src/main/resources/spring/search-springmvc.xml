@@ -32,7 +32,11 @@
     <!--<mvc:resources mapping="/css/**" location="/css/"/>-->
     <!--<mvc:resources mapping="/js/**" location="/js/"/>-->
 
+    <!--是将springmvc不能处理的请求交给tomcat-->
     <mvc:default-servlet-handler/>
+
+    <!--配置全局异常信息-->
+    <bean class="com.taotao.search.exception.GlobalExceptionResolver"/>
 
     <!-- 引用dubbo服务 -->
     <dubbo:application name="taotao-search-web"/>

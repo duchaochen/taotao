@@ -1,12 +1,21 @@
 # taotao
 淘淘商城项目所踩到的坑
-maven安装命令
+
+#maven安装命令
     
     clean install -Dfile.encoding=UTF-8
     
     如果是腾讯云需要安装iptables（已安装忽略），要不然不能使用查看防火墙命令
     
     yum install iptables-services
+    
+#控制台日志乱码问题
+
+    中文乱码需要修改四个部分：
+    1.idea安装目录下的bin/idea64.exe.vmoptions和bin/idea.exe.vmoptions追加-Dfile.encoding=UTF-8
+    2.log4j对应的properties文件中需要增加log4j.appender.F.Encoding=utf-8（其中F是自定义的）
+    3.idea–》setting–》File encoding–》修改三处编码集为UTF-8
+    4.发布服务器修改，edit configuration–》VM options=-Dfile.encoding=UTF-8 
 
 #淘淘商城文件服务器问题
 

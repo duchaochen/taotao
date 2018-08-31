@@ -38,6 +38,11 @@
         </dependency>
         <dependency>
             <groupId>com.taotao</groupId>
+            <artifactId>taotao-search-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.taotao</groupId>
             <artifactId>taotao-manager-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
