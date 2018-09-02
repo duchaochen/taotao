@@ -38,6 +38,7 @@
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.7" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jms:4.2.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-messaging:4.2.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.apache.activemq:activemq-all:5.13.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.2.4.RELEASE" />
           <element id="library" level="project" name="Maven: com.alibaba:dubbo:2.5.3" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.15.0-GA" />

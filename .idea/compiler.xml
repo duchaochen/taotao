@@ -9,6 +9,7 @@
         <module name="taotao-common" />
         <module name="taotao-content-interface" />
         <module name="taotao-content-service" />
+        <module name="taotao-item-web" />
         <module name="taotao-manager-dao" />
         <module name="taotao-manager-interface" />
         <module name="taotao-manager-pojo" />
@@ -26,6 +27,7 @@
       <module name="taotao-content" target="1.7" />
       <module name="taotao-content-interface" target="1.7" />
       <module name="taotao-content-service" target="1.7" />
+      <module name="taotao-item-web" target="1.7" />
       <module name="taotao-manager" target="1.7" />
       <module name="taotao-manager-dao" target="1.7" />
       <module name="taotao-manager-interface" target="1.7" />

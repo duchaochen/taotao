@@ -1,6 +1,11 @@
 # taotao
 淘淘商城项目所踩到的坑
 
+#taotao-search-web运行之后的路径
+    搜索链接
+    http://localhost:8085/search.html?q=%E6%89%8B%E6%9C%BA
+    查询详细链接
+    http://localhost:8086/item/153585278340714.html
 #maven安装命令
     
     clean install -Dfile.encoding=UTF-8
@@ -8,6 +13,7 @@
     如果是腾讯云需要安装iptables（已安装忽略），要不然不能使用查看防火墙命令
     
     yum install iptables-services
+    
     
 #控制台日志乱码问题
 
@@ -20,11 +26,9 @@
 #淘淘商城文件服务器问题
 
     将淘淘商城中的文件服务器用虚拟机启动之后查看ip地址，然后上传的ip修改为虚拟机文件服务器的ip即可。
-    我是直接可以使用的，问题就是文件服务器的ip地址和视频中的ip地址不一致。
-    
-以下都是自己安装虚礼机的测试操作
+    我是直接可以使用的，问题就是文件服务器的ip地址和视频中的ip地址不一致。而不是视频中说的ip是133。
 
-#第一个问题：注册dubbo问题
+#注册dubbo问题
 
     zookeeper的端口没有开放 
     我踩到这个坑了，由于linux系统的命令完全不会，就靠百度，百度之后出来的命令是错误的，结果导致我的端口一直没有开放，最后一直都是启动了tomcat之后访问什么都是404错误，最后百度了好久都是找的关键字是idea启动dubbo项目访问404，结果照做都无法解决问题，最后找了2天都没有找到问题，然后从头一步步的弄，最后还是把端口重新开放一下，测试结果成功了。
@@ -38,7 +42,7 @@
     /etc/init.d/iptables save   保存修改
     service iptables restart    重启防火墙，修改生效
     
-在启动dubbo注册中心出现java.net.UnknownHostException: dubbo:错误解决方案,我的机器名称为dubbo
+    3.在启动dubbo注册中心出现java.net.UnknownHostException: dubbo:错误解决方案,我的机器名称为dubbo
     从报错的信息看是没有找到dubbo对应的名称和服务。于是在linux下用hostname命令查看hostname
     [root@zzyyb /]# hostname
     dubbo
@@ -58,20 +62,18 @@
 
     接着再启动dubbo服务，可以正常启动不报java.net.UnknownHostException 未知的名称或服务的错误了。
     
-#第二个问题：
+    
+#zookeeper问题：
+
     就是把注册zookeeper的ip地址一定要输入正确，这个问题一般不会出现
     由于我在家和公司的zookeeper的注册ip地址不同所以导致出现的这个问题。
 
-#第三个问题：
-        `当使用idea上的maven的install命令安装时，控制台出现中文乱码时，
-        需要在settings -> maven -> Runner的 VM options设置一下字符编码 -Dfile.encoding=GBK`
+#maven编译时控制台出现中文乱码：
 
-#第四个问题：
-    `文件服务器fsatDFS复制到虚拟机之后开启直接查看ip之后，代码链接的时候对应上ip就可以使用了。而不是视频中说的ip是133。`
-    
-    
-#第五个问题：
-##org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 。。。。
+    当使用idea上的maven的install命令安装时，控制台出现中文乱码时，
+    需要在settings -> maven -> Runner的 VM options设置一下字符编码 -Dfile.encoding=GBK
+
+#org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 。。。。
 
      <resources>
         <!-- maven项目中src源代码下的xml等资源文件编译进classes文件夹，
@@ -89,7 +91,7 @@
         </resource>
     </resources>  
 
-#第六个问题redis集群关闭防火墙
+#redis集群关闭防火墙
 
         查看防火墙状态：
         [root@centos6 ~]# service iptables status
@@ -100,8 +102,15 @@
         
         关闭防火墙：
         [root@centos6 ~]# service iptables stop
+        
+        
+#redis存整张表方式案例：
+        存储格式：
+            表名:唯一键id:储存字段名称
+        命令：
+            set tb_user:7:username zhangsan
 
-#第七个问题Linux下如何查看tomcat是否启动
+#Linux下如何查看tomcat是否启动
 
     在Linux系统下，重启Tomcat使用命令的操作！
     首先，进入Tomcat下的bin目录
@@ -135,7 +144,8 @@
     查看tomcat启动日志
     tail -f logs/catalina.out
     
-#第八个问题：solr
+    
+#solr异常问题
     
     HTTP Status 500 - {msg=SolrCore 'collection1' is not available due to init failure: Index locked for write 
     for core collection1,trace=org.apache.solr.common.SolrException: SolrCore 'collection1' is not available 
@@ -157,6 +167,7 @@
     
     并且在linux上安装Solr,一切准备就绪的时候报出404错误,此时检查jar包是否导入到了tomcat/webapps/Solr/WEB-INF/lib中,从Solr客户端下面的example/lib/ext之下的所有jar包复制到tomcat根目录的lib文件夹中,也可以复制到tomcat/webapps/Solr/WEB-INF/lib中.特此记录一下
   
+  
 #activemq安装好之后以下操作
     
     activemq的默认端口号为8161
@@ -166,3 +177,153 @@
     /sbin/iptables -I INPUT -p tcp --dport 8161 -j ACCEPT&&/etc/init.d/iptables save&&service iptables restart&&/etc/init.d/iptables status
     /sbin/iptables -I INPUT -p tcp --dport 61616 -j ACCEPT&&/etc/init.d/iptables save&&service iptables restart&&/etc/init.d/iptables status
 
+#activemq调用注意
+    发送方的消息队列名称一定要和接收方的消息队列名称(itemAddTopic引用的name="item-add-topic")一致，并且tcp的地址要一致，要不然是接收不到的。
+    以下是发送发的配置:
+    <!-- JMS服务厂商提供的ConnectionFactory -->
+        <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+            <constructor-arg name="brokerURL" value="tcp://192.168.25.146:61616"/>
+        </bean>
+        <!-- spring对象ConnectionFactory的封装 -->
+        <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+            <property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+        </bean>
+    
+        <!-- 配置JMSTemplate -->
+        <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+            <property name="connectionFactory" ref="connectionFactory"/>
+        </bean>
+        <!-- 配置消息的目标Destination对象 -->
+        <bean id="test-queue" class="org.apache.activemq.command.ActiveMQQueue">
+            <constructor-arg name="name" value="test-queue"/>
+        </bean>
+    
+        <bean id="itemAddTopic" class="org.apache.activemq.command.ActiveMQTopic">
+            <constructor-arg name="name" value="item-add-topic"/>
+        </bean>
+        
+        以下是接收方的配置:
+        <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        		<constructor-arg name="brokerURL" value="tcp://192.168.25.146:61616"/>
+        	</bean>
+        
+        	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        		<property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+        	</bean>
+        	<!--使用queue形式发送消息,点对点形式-->
+        	<bean id="test-queue" class="org.apache.activemq.command.ActiveMQQueue">
+        		<constructor-arg name="name" value="test-queue"/>
+        	</bean>
+        
+        	<bean id="myMessageListener" class="com.taotao.search.listener.MyMessageListener"/>
+        
+        	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        		<property name="connectionFactory" ref="connectionFactory"/>
+        		<property name="destination" ref="test-queue"/>
+        		<property name="messageListener" ref="myMessageListener"/>
+        	</bean>
+        
+        	<!--使用Topic形式发送消息,群发形式-->
+        	<bean id="itemAddTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        		<constructor-arg name="name" value="item-add-topic"/>
+        	</bean>
+        
+        	<bean id="itemAddTopicListener" class="com.taotao.search.listener.ItemAddTopicListener"/>
+        
+        	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        		<property name="connectionFactory" ref="connectionFactory"/>
+        		<property name="destination" ref="itemAddTopic"/>
+        		<property name="messageListener" ref="itemAddTopicListener"/>
+        	</bean>
+        	
+        	
+#读取配置properties文件出错
+    程序异常Could not resolve placeholder 'ITEM_INFO' in string value "${ITEM_INFO}"
+    一般都是有2处spring的配置文件中都<context:property-placeholder location="classpath:properties/*.properties"/>标签
+    
+    主要从以下几个地方去解决：
+    1. 两处都添加ignore-unresolvable="true"
+    2.获取去掉一处，将另一处修改为<context:property-placeholder location="classpath:properties/*.properties"/>
+    
+#nginx安装
+    
+    1.安装：yum install gcc-c++ 
+    2.安装第三方开发包pcre：yum install -y pcre pcre-devel
+    3.安装zlib：yum install -y zlib zlib-devel
+    4.安装openssl:yum install -y openssl openssl-devel
+    5.创建makefile文件夹命令：./configure \
+      --prefix=/usr/local/src/nginx \
+      --pid-path=/var/run/nginx/nginx.pid \
+      --lock-path=/var/lock/nginx.lock \
+      --error-log-path=/var/log/nginx/error.log \
+      --http-log-path=/var/log/nginx/access.log \
+      --with-http_gzip_static_module \
+      --http-client-body-temp-path=/var/temp/nginx/client \
+      --http-proxy-temp-path=/var/temp/nginx/proxy \
+      --http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
+      --http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
+      --http-scgi-temp-path=/var/temp/nginx/scgi
+     6.编译源代码：make
+     7.安装nginx：make install
+     
+     8.首先查看是否存在/var/temp/nginx文件夹命令：cd /var/temp/nginx
+       如果没有就创建一个，创建多级文件夹命令：mkdir /var/temp/nginx -p
+     
+     9.如果在没有创建就直接启动nginx的话会出现以下异常
+     nginx: [emerg] mkdir() "/var/temp/nginx/client" failed (2: No such file or directory)
+     是因为没有这个/var/temp/nginx的文件夹
+
+     10.进入nginx的sbin文件夹：cd /usr/local/src/nginx/sbin
+     11.启动nginx：./nginx
+     12.查看nginx进程命令:ps aux|grep nginx
+     13.关闭nginx命令：kill 进程号,或者使用./nginx -s stop
+     14.修改nginx配置文件之后，刷新服务命令：./nginx -s reload
+     
+     现在就可以输入地址直接访问了，端口默认是80，如果访问不到表示端口没有开放，个人练习情况可以直接关闭防火墙
+     关闭防火墙命令:service iptables stop
+     
+#本地nginx根据域名区分不同程序
+
+    首先在hosts文件中绑定2个域名
+    使用管理员权限打开C:\Windows\System32\drivers\etc\hosts文件,然后配置以下域名，这个就是配置本地郁闷绑定的ip
+    192.168.25.146 www.aaa.com
+    192.168.25.146 www.bbb.com
+    
+    然后配置nginx程序访问
+    打开/usr/local/src/nginx/conf/nginx.conf文件，配置以下代码
+    server {
+            listen       80;
+            server_name  www.aaa.com;
+    
+            #charset koi8-r;
+    
+            #access_log  logs/host.access.log  main;
+    
+            location / {
+                root   html-aaa;
+                index  index.html index.htm;
+            }
+         }
+         
+     1)listen端口：80，表示多个域名公用80端口
+     2)server_name:刚刚添加的域名
+     3)root表示访问的程序文件夹，
+       该文件夹需要在创建一个出来 cp /usr/local/src/nginx/html /usr/local/src/nginx/html-aaa -r
+    4)index表示默认访问的页面，这些页面需要在刚刚创建的html-aaa文件夹中存在
+    5)以上就配置好了，注意下，刚刚创建了2个域名www.aaa.com和www.bbb.com,所以上面的server需要在复制一个，
+    然后在配置一个www.bbb.com如下：
+    server {
+                listen       80;
+                server_name  www.bbb.com;
+        
+                #charset koi8-r;
+        
+                #access_log  logs/host.access.log  main;
+        
+                location / {
+                    root   html-bbb;
+                    index  index.html index.htm;
+                }
+             }
+     其它的操作同上面一样,主要是要创建一个html-bbb的文件夹
+    6)重启nginx：/usr/local/src/nginx/sbin/nginx -s reload

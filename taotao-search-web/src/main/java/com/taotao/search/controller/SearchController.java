@@ -31,7 +31,7 @@ public class SearchController {
 	@RequestMapping("/search")
 	public String search(@RequestParam("q")String queryString, 
 			@RequestParam(defaultValue="1")Integer page, Model model) throws Exception {
-		int a = 1/0;
+//		int a = 1/0;
 		//调用服务执行查询
 		//把查询条件进行转码，解决get乱码问题
 //		queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
