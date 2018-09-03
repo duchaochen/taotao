@@ -110,7 +110,7 @@
         命令：
             set tb_user:7:username zhangsan
 
-#Linux下如何查看tomcat是否启动
+#tomcat启动停止以及查看tomcat进程-Linux下如何查看tomcat是否启动
 
     在Linux系统下，重启Tomcat使用命令的操作！
     首先，进入Tomcat下的bin目录
@@ -120,7 +120,7 @@
     ./shutdown.sh
     
     查看Tomcat是否以关闭
-    ps -ef|grep java
+    ps -ef|grep tomcat
     
     如果显示以下相似信息，说明Tomcat还没有关闭
     记住看清楚自己的linux的tomcat是不是root 7001
@@ -133,7 +133,7 @@
     kill -9 7010
    
     然后继续查看Tomcat是否关闭
-    ps -ef|grep java
+    ps -ef|grep tomcat
     
     如果出现以下信息，则表示Tomcat已经关闭
     root 7010 1 0 Apr19 ? 00:30:30 [java]
@@ -251,7 +251,10 @@
     2.安装第三方开发包pcre：yum install -y pcre pcre-devel
     3.安装zlib：yum install -y zlib zlib-devel
     4.安装openssl:yum install -y openssl openssl-devel
-    5.创建makefile文件夹命令：./configure \
+    5.创建makefile文件夹需要进入nginx文件夹中，
+    命令：cd /usr/local/src/nginx-1.8.0
+    然后执行以下命令：
+      ./configure \
       --prefix=/usr/local/src/nginx \
       --pid-path=/var/run/nginx/nginx.pid \
       --lock-path=/var/lock/nginx.lock \
@@ -263,7 +266,8 @@
       --http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
       --http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
       --http-scgi-temp-path=/var/temp/nginx/scgi
-     6.编译源代码：make
+      
+     6.这个时候就有了Makefile文件夹了，这个时候编译源代码命令：make
      7.安装nginx：make install
      
      8.首先查看是否存在/var/temp/nginx文件夹命令：cd /var/temp/nginx
@@ -273,7 +277,8 @@
      nginx: [emerg] mkdir() "/var/temp/nginx/client" failed (2: No such file or directory)
      是因为没有这个/var/temp/nginx的文件夹
 
-     10.进入nginx的sbin文件夹：cd /usr/local/src/nginx/sbin
+     10.进入nginx的sbin文件夹：cd /usr/local/src/nginx/sbin,如果存在nginx文件夹存在local中在，
+     则命令为：cd /usr/local/nginx/sbin
      11.启动nginx：./nginx
      12.查看nginx进程命令:ps aux|grep nginx
      13.关闭nginx命令：kill 进程号,或者使用./nginx -s stop
@@ -289,7 +294,7 @@
     192.168.25.146 www.aaa.com
     192.168.25.146 www.bbb.com
     
-    然后配置nginx程序访问
+    然后配置nginx程序访问静态资源
     打开/usr/local/src/nginx/conf/nginx.conf文件，配置以下代码
     server {
             listen       80;
@@ -326,4 +331,118 @@
                 }
              }
      其它的操作同上面一样,主要是要创建一个html-bbb的文件夹
-    6)重启nginx：/usr/local/src/nginx/sbin/nginx -s reload
+    6)重启nginx命令：/usr/local/src/nginx/sbin/nginx -s reload
+    
+#niginx反向代理
+
+    安装3个tomcat，将将3个tomcat端口设置不一样即可.
+    1.上传apache-tomcat-7.0.47.tar.gz文件
+    2.进入上传文件的同级目录下命令：cd /usr/local/src/tomcat
+    3.解压命令：tar -zxf apache-tomcat-7.0.47.tar.gz
+      并且将解压的文件目录修改为tomcat01命令：mv apache-tomcat-7.0.47 tomcat01
+    4.然后复制2个tomcat出来，命令：cp tomcat01 tomcat02 -r和cp tomcat01 tomcat03 -r
+    5.修改各自端口
+        tomcat01：
+            1）<Server port="8006" shutdown="SHUTDOWN">
+            
+            2）<Connector port="8081" protocol="HTTP/1.1"
+                           connectionTimeout="20000"
+                           redirectPort="8443" />
+            3)<Connector port="8011" protocol="AJP/1.3" redirectPort="8443" />
+            
+       tomcat02：
+            1）<Server port="8007" shutdown="SHUTDOWN">
+            2）<Connector port="8082" protocol="HTTP/1.1"
+                                       connectionTimeout="20000"
+                                       redirectPort="8443" />
+            3)<Connector port="8012" protocol="AJP/1.3" redirectPort="8443" />   
+                                     
+        tomcat03：
+           1）<Server port="8008" shutdown="SHUTDOWN">
+           2）<Connector port="8083" protocol="HTTP/1.1"
+                                      connectionTimeout="20000"
+                                      redirectPort="8443" /> 
+           3)<Connector port="8013" protocol="AJP/1.3" redirectPort="8443" /> 
+    6.然后开启3个tomcat命令： 
+            1)/usr/local/src/tomcat/tomcat01/bin/startup.sh
+            2)/usr/local/src/tomcat/tomcat02/bin/startup.sh
+            3)/usr/local/src/tomcat/tomcat03/bin/startup.sh
+            
+            
+    7.配置nginx反向代理动态资源
+        1)进入代理的配置nginx配置文件命令： cd /usr/local/src/nginx/conf
+        2)添加upstream节点并且配置对应的ip地址和端口号
+            
+            upstream tomcat01{
+            server 192.168.25.146:8081;
+            }
+        
+            upstream tomcat02{
+            server 192.168.25.146:8082;
+            }
+        
+            upstream tomcat03{
+            server 192.168.25.146:8083;
+            }
+        3)修改server中location的root节点名称为porxy_pass   http://tomcat01;
+             server {
+                    listen       80;
+                    server_name  www.tomcat01.com;
+            
+                    #charset koi8-r;
+            
+                    #access_log  logs/host.access.log  main;
+            
+                    location / {
+                        porxy_pass   http://tomcat01;
+                        index  index.html index.htm;
+                    }
+                }
+                
+                server {
+                    listen       80;
+                    server_name  www.tomcat02.com;
+            
+                    #charset koi8-r;
+            
+                    #access_log  logs/host.access.log  main;
+            
+                    location / {
+                        porxy_pass   http://tomcat02;
+                        index  index.html index.htm;
+                    }
+                }
+                
+                server {
+                    listen       80;
+                    server_name  www.tomcat03.com;
+            
+                    #charset koi8-r;
+            
+                    #access_log  logs/host.access.log  main;
+            
+                    location / {
+                        porxy_pass   http://tomcat03;
+                        index  index.html index.htm;
+                    }
+                }
+                
+           最后重新加载配置文件命令：/usr/local/src/nginx/sbin/nginx -s reload
+
+#nginx负载均衡
+
+        只需要在上面配置好的upstream中多配置几个tomcat服务器即可,例如:
+             upstream tomcat02{
+                server 192.168.25.146:8083 weight=1;
+                server 192.168.25.146:8084 weight=1;
+                server 192.168.25.146:8085 weight=1;
+                server 192.168.25.146:8086 weight=1;
+            }
+        weight的数值越大表示权重越高，表示被访问的越多,默认值都是1
+        注意：如果在一台服务器中安装多个tomcat一定要修改端口,
+        如果已经修改过的nginx和tomcat的配置文件一定要都重新加载一下。
+
+
+
+
+            

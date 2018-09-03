@@ -2,16 +2,13 @@ package com.taotao.search.listener;
 
 import com.taotao.common.pojo.SearchItem;
 import com.taotao.search.mapper.SearchItemMapper;
-import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-import java.io.IOException;
 
 /**
  * 添加商品之后更新索引库
