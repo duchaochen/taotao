@@ -278,7 +278,7 @@
      是因为没有这个/var/temp/nginx的文件夹
 
      10.进入nginx的sbin文件夹：cd /usr/local/src/nginx/sbin,如果存在nginx文件夹存在local中在，
-     则命令为：cd /usr/local/nginx/sbin
+     则命令为：cd /usr/local/src/nginx/sbin
      11.启动nginx：./nginx
      12.查看nginx进程命令:ps aux|grep nginx
      13.关闭nginx命令：kill 进程号,或者使用./nginx -s stop
@@ -441,6 +441,7 @@
         weight的数值越大表示权重越高，表示被访问的越多,默认值都是1
         注意：如果在一台服务器中安装多个tomcat一定要修改端口,
         如果已经修改过的nginx和tomcat的配置文件一定要都重新加载一下。
+        /usr/local/src/nginx/sbin/nginx -s reload
 
 
 

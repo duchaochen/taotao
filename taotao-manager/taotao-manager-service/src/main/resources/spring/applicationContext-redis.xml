@@ -25,7 +25,7 @@
         <constructor-arg name="port" value="6379"/>
     </bean>
 
-    <bean id="jedisClientPool" class="com.taotao.jedis.JedisClientPool"/>
+    <bean id="jedisClientPool" class="com.taotao.JedisClientPool"/>
 
     <!--&lt;!&ndash;redis集群&ndash;&gt;-->
     <!--<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">-->
@@ -60,5 +60,5 @@
     <!--</bean>-->
 
 
-    <!--<bean id="jedisClientCluster" class="com.taotao.jedis.JedisClientCluster"/>-->
+    <!--<bean id="jedisClientCluster" class="com.taotao.JedisClientCluster"/>-->
 </beans>
