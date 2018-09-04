@@ -1,6 +1,12 @@
 # taotao
 淘淘商城项目所踩到的坑
 
+#.html后缀请求出现406错误的话，
+    在springmvc中配置了<url-pattern>*.html</url-pattern>
+    一般使用了ResponseBody返回的话，就会直接出现406错误。
+    只要使用了ResponseBody的话，最好在web.xml配置<url-pattern>/</url-pattern>
+    这种情况返回的时候就可以返回ResponseBody的json对象了。
+    
 #taotao-search-web运行之后的路径
     搜索链接
     http://localhost:8085/search.html?q=%E6%89%8B%E6%9C%BA
@@ -170,6 +176,12 @@
   
 #activemq安装好之后以下操作
     
+    启动、访问、查看状态和停止activemq服务
+    开启：./activemq/bin/activemq start
+    访问：wget 192.168.2.137:8161
+    查看：./activemq/bin/activemq status
+    停止./activemq/bin/activemq stop
+    
     activemq的默认端口号为8161
     开启activemqq防火墙端口
     1、如果使用了云服务器需要先开启8161(web管理页面端口）、61616（activemq服务监控端口） 两个端口
@@ -197,12 +209,13 @@
         <bean id="test-queue" class="org.apache.activemq.command.ActiveMQQueue">
             <constructor-arg name="name" value="test-queue"/>
         </bean>
-    
+        
+        <!--使用Topic形式发送消息,群发形式-->
         <bean id="itemAddTopic" class="org.apache.activemq.command.ActiveMQTopic">
             <constructor-arg name="name" value="item-add-topic"/>
         </bean>
         
-        以下是接收方的配置:
+      以下是接收方的配置:
         <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         		<constructor-arg name="brokerURL" value="tcp://192.168.25.146:61616"/>
         	</bean>

@@ -36,6 +36,6 @@
     
     <servlet-mapping>
         <servlet-name>taotao-sso-web</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>

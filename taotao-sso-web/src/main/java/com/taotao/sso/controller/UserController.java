@@ -1,0 +1,59 @@
+package com.taotao.sso.controller;
+
+import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.CookieUtils;
+import com.taotao.pojo.TbUser;
+import com.taotao.sso.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Controller
+public class UserController {
+    @Value("${TOKEN_KEY}")
+    private String TOKEN_KEY;
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/user/check/{param}/{type}")
+    @ResponseBody
+    public TaotaoResult checkData(@PathVariable String param,@PathVariable Integer type) {
+        TaotaoResult taotaoResult = userService.checkData(param, type);
+        return taotaoResult;
+    }
+
+    @RequestMapping(value="/user/register", method= RequestMethod.POST)
+    @ResponseBody
+    public TaotaoResult regitster(TbUser user) {
+        TaotaoResult result = userService.register(user);
+        return result;
+    }
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @param response
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/user/login", method=RequestMethod.POST)
+    @ResponseBody
+    public TaotaoResult login(String username, String password,
+                              HttpServletResponse response, HttpServletRequest request) {
+        TaotaoResult result = userService.login(username, password);
+        //登录成功后写cookie
+        if (result.getStatus() == 200) {
+            //把token写入cookie
+            CookieUtils.setCookie(request, response, TOKEN_KEY, result.getData().toString());
+        }
+        return result;
+    }
+}

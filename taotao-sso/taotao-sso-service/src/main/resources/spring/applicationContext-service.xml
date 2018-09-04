@@ -18,7 +18,7 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-    <context:component-scan base-package="com.taotao.soso.service"/>
+    <context:component-scan base-package="com.taotao.sso.service"/>
 
     <!-- 发布dubbo服务 -->
     <!-- 提供方应用信息，用于计算依赖关系 -->
@@ -28,5 +28,5 @@
     <!-- 用dubbo协议在20881端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20883" />
     <!-- 声明需要暴露的服务接口 -->
-    <!--<dubbo:service interface="com.taotao.content.service.ContentCategoryService" ref="contentCategoryServiceImpl" timeout="300000"/>-->
+    <dubbo:service interface="com.taotao.sso.service.UserService" ref="userServiceImpl" timeout="300000"/>
 </beans>
