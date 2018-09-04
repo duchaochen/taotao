@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 过期时间
      */
-    @Value("${SESSION_EXPIRE=1800}")
+    @Value("${SESSION_EXPIRE}")
     private Integer SESSION_EXPIRE;
 
     /**
@@ -155,5 +155,24 @@ public class UserServiceImpl implements UserService {
         jedisClient.expire(USER_SESSION + ":" + token,SESSION_EXPIRE);
 
         return TaotaoResult.ok(token);
+    }
+
+    /**
+     * 获取token
+     * @param token
+     * @return
+     */
+    @Override
+    public TaotaoResult getUserByToken(String token) {
+        String json = jedisClient.get(USER_SESSION + ":" + token);
+        if (StringUtils.isBlank(json)) {
+            return TaotaoResult.build(400, "用户登录已经过期");
+        }
+        //重置Session的过期时间
+        jedisClient.expire(USER_SESSION + ":" + token, SESSION_EXPIRE);
+        //把json转换成User对象
+        TbUser user = JsonUtils.jsonToPojo(json, TbUser.class);
+        return TaotaoResult.ok(user);
+        //return TaotaoResult.ok(json);
     }
 }

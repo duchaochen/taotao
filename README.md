@@ -1,17 +1,22 @@
 # taotao
 淘淘商城项目所踩到的坑
 
-#.html后缀请求出现406错误的话，
+#.html后缀请求出现406错误的话
+
     在springmvc中配置了<url-pattern>*.html</url-pattern>
     一般使用了ResponseBody返回的话，就会直接出现406错误。
     只要使用了ResponseBody的话，最好在web.xml配置<url-pattern>/</url-pattern>
     这种情况返回的时候就可以返回ResponseBody的json对象了。
+    
+    
     
 #taotao-search-web运行之后的路径
     搜索链接
     http://localhost:8085/search.html?q=%E6%89%8B%E6%9C%BA
     查询详细链接
     http://localhost:8086/item/153585278340714.html
+    
+    
 #maven安装命令
     
     clean install -Dfile.encoding=UTF-8
@@ -19,6 +24,7 @@
     如果是腾讯云需要安装iptables（已安装忽略），要不然不能使用查看防火墙命令
     
     yum install iptables-services
+    
     
     
 #控制台日志乱码问题
@@ -36,8 +42,11 @@
 
 #注册dubbo问题
 
-    zookeeper的端口没有开放 
-    我踩到这个坑了，由于linux系统的命令完全不会，就靠百度，百度之后出来的命令是错误的，结果导致我的端口一直没有开放，最后一直都是启动了tomcat之后访问什么都是404错误，最后百度了好久都是找的关键字是idea启动dubbo项目访问404，结果照做都无法解决问题，最后找了2天都没有找到问题，然后从头一步步的弄，最后还是把端口重新开放一下，测试结果成功了。
+    一、zookeeper的端口没有开放 
+    我踩到这个坑了，由于linux系统的命令完全不会，就靠百度，百度之后出来的命令是错误的，
+    结果导致我的端口一直没有开放，最后一直都是启动了tomcat之后访问什么都是404错误，
+    最后百度了好久都是找的关键字是idea启动dubbo项目访问404，结果照做都无法解决问题，
+    最后找了2天都没有找到问题，然后从头一步步的弄，最后还是把端口重新开放一下，测试结果成功了。
     问题结局步骤。
     
     1.查看端口是否开放命令：
@@ -68,6 +77,20 @@
 
     接着再启动dubbo服务，可以正常启动不报java.net.UnknownHostException 未知的名称或服务的错误了。
     
+    二、如果出现org.springframework.beans.factory.BeanCreationException: 
+        Error creating bean with name 'userController': 
+            Injection of autowired dependencies failed; 
+        nested exception is org.springframework.beans.factory.BeanCreationException: 
+            Could not autowire field: 
+                private com.taotao.sso.service.UserService com.taotao.sso.controller.UserController.userService; 
+            nested exception is org.springframework.beans.factory.BeanCreationException: 
+                Error creating bean with name 'userService': 
+                FactoryBean threw exception on object creation; 
+                
+            nested exception is java.lang.IllegalStateException: 
+                Failed to check the status of the service com.taotao.sso.service.UserService. No provider available for the service com.taotao.sso.service.UserService from the url zookeeper://118.25.193.43:2181/com.alibaba.dubbo.registry.RegistryService?application=taotao-portal-web&dubbo=2.5.3&interface=com.taotao.sso.service.UserService&methods=checkData,login,register&pid=10084&revision=0.0.1-SNAPSHOT&side=consumer&timestamp=1536061598146 to the consumer 192.168.110.116 use dubbo version 2.5.3
+        以上问题一定要检查dubbo的<dubbo:application name="taotao-sso" />名称，一般复制过来都忘记修改了
+        
     
 #zookeeper问题：
 
@@ -108,6 +131,7 @@
         
         关闭防火墙：
         [root@centos6 ~]# service iptables stop
+        
         
         
 #redis存整张表方式案例：
@@ -151,6 +175,7 @@
     tail -f logs/catalina.out
     
     
+    
 #solr异常问题
     
     HTTP Status 500 - {msg=SolrCore 'collection1' is not available due to init failure: Index locked for write 
@@ -172,6 +197,7 @@
     </solr>
     
     并且在linux上安装Solr,一切准备就绪的时候报出404错误,此时检查jar包是否导入到了tomcat/webapps/Solr/WEB-INF/lib中,从Solr客户端下面的example/lib/ext之下的所有jar包复制到tomcat根目录的lib文件夹中,也可以复制到tomcat/webapps/Solr/WEB-INF/lib中.特此记录一下
+  
   
   
 #activemq安装好之后以下操作
@@ -250,6 +276,7 @@
         	</bean>
         	
         	
+        	
 #读取配置properties文件出错
     程序异常Could not resolve placeholder 'ITEM_INFO' in string value "${ITEM_INFO}"
     一般都是有2处spring的配置文件中都<context:property-placeholder location="classpath:properties/*.properties"/>标签
@@ -257,6 +284,7 @@
     主要从以下几个地方去解决：
     1. 两处都添加ignore-unresolvable="true"
     2.获取去掉一处，将另一处修改为<context:property-placeholder location="classpath:properties/*.properties"/>
+    
     
 #nginx安装
     
@@ -299,6 +327,7 @@
      
      现在就可以输入地址直接访问了，端口默认是80，如果访问不到表示端口没有开放，个人练习情况可以直接关闭防火墙
      关闭防火墙命令:service iptables stop
+     
      
 #本地nginx根据域名区分不同程序
 
@@ -345,6 +374,7 @@
              }
      其它的操作同上面一样,主要是要创建一个html-bbb的文件夹
     6)重启nginx命令：/usr/local/src/nginx/sbin/nginx -s reload
+    
     
 #niginx反向代理
 

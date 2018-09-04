@@ -22,6 +22,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/taotao-portal-web/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-sso/pom.xml" />
         <option value="$PROJECT_DIR$/taotao-test/pom.xml" />
       </set>
     </option>
