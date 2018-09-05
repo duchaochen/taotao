@@ -14,7 +14,7 @@
 <body>
 <div class="w" id="logo">
     <div>
-    	<a href="http://localhost:8082">
+    	<a href="http://localhost:8083">
     		<img src="/images/taotao-logo.gif" alt="淘淘商城" width="170" height="60"/>
     	</a> <b></b>
     </div>
@@ -27,7 +27,7 @@
         </ul>
         <div class="extra">
         <span>我已经注册，现在就&nbsp;
-        	<a href="http://localhost:8088/page/login" class="flk13">登录</a>
+        	<a href="http://localhost:8087/page/login" class="flk13">登录</a>
         </span>
         </div>
     </div>
