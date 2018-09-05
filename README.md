@@ -9,7 +9,6 @@
     这种情况返回的时候就可以返回ResponseBody的json对象了。
     
     
-    
 #taotao-search-web运行之后的路径
     搜索链接
     http://localhost:8085/search.html?q=%E6%89%8B%E6%9C%BA
@@ -18,14 +17,12 @@
     
     
 #maven安装命令
-    
+   
     clean install -Dfile.encoding=UTF-8
     
     如果是腾讯云需要安装iptables（已安装忽略），要不然不能使用查看防火墙命令
     
     yum install iptables-services
-    
-    
     
 #控制台日志乱码问题
 
@@ -48,7 +45,7 @@
     最后百度了好久都是找的关键字是idea启动dubbo项目访问404，结果照做都无法解决问题，
     最后找了2天都没有找到问题，然后从头一步步的弄，最后还是把端口重新开放一下，测试结果成功了。
     问题结局步骤。
-    
+
     1.查看端口是否开放命令：
     /etc/init.d/iptables status 
      
@@ -89,11 +86,16 @@
                 
             nested exception is java.lang.IllegalStateException: 
                 Failed to check the status of the service com.taotao.sso.service.UserService. No provider available for the service com.taotao.sso.service.UserService from the url zookeeper://118.25.193.43:2181/com.alibaba.dubbo.registry.RegistryService?application=taotao-portal-web&dubbo=2.5.3&interface=com.taotao.sso.service.UserService&methods=checkData,login,register&pid=10084&revision=0.0.1-SNAPSHOT&side=consumer&timestamp=1536061598146 to the consumer 192.168.110.116 use dubbo version 2.5.3
-        以上问题一定要检查dubbo的<dubbo:application name="taotao-sso" />名称，一般复制过来都忘记修改了
+        1.以上问题一定要检查dubbo的<dubbo:application name="taotao-sso" />名称，一般复制过来都忘记修改了
+        2.就是将模块install一下
         
     
 #zookeeper问题：
 
+    1.开启zookeeper命令：./zkServer.sh start
+    2.停止zookeeper命令: ./zkServer.sh stop
+    3.查看是否开启命令： ./zkServer.sh status
+    
     就是把注册zookeeper的ip地址一定要输入正确，这个问题一般不会出现
     由于我在家和公司的zookeeper的注册ip地址不同所以导致出现的这个问题。
 
@@ -122,6 +124,10 @@
 
 #redis集群关闭防火墙
 
+        redis启动,进入redis的安装之后的bin路径：
+            cd /usr/local/src/redis/redisinstall/bin
+            开启服务:	./redis-server redis.conf
+
         查看防火墙状态：
         [root@centos6 ~]# service iptables status
         iptables：未运行防火墙。
@@ -132,8 +138,6 @@
         关闭防火墙：
         [root@centos6 ~]# service iptables stop
         
-        
-        
 #redis存整张表方式案例：
         存储格式：
             表名:唯一键id:储存字段名称
@@ -141,6 +145,8 @@
             set tb_user:7:username zhangsan
 
 #tomcat启动停止以及查看tomcat进程-Linux下如何查看tomcat是否启动
+ 
+    在idea设置tomcat时需要在vm中设置：-Xmx728m -Dfile.encoding=UTF-8
 
     在Linux系统下，重启Tomcat使用命令的操作！
     首先，进入Tomcat下的bin目录
@@ -196,7 +202,9 @@
     <solr> 
     </solr>
     
-    并且在linux上安装Solr,一切准备就绪的时候报出404错误,此时检查jar包是否导入到了tomcat/webapps/Solr/WEB-INF/lib中,从Solr客户端下面的example/lib/ext之下的所有jar包复制到tomcat根目录的lib文件夹中,也可以复制到tomcat/webapps/Solr/WEB-INF/lib中.特此记录一下
+    并且在linux上安装Solr,一切准备就绪的时候报出404错误,此时检查jar包是否导入到了tomcat/webapps/Solr/WEB-INF/lib中,
+    从Solr客户端下面的example/lib/ext之下的所有jar包复制到tomcat根目录的lib文件夹中,
+    也可以复制到tomcat/webapps/Solr/WEB-INF/lib中.特此记录一下
   
   
   
@@ -278,6 +286,7 @@
         	
         	
 #读取配置properties文件出错
+
     程序异常Could not resolve placeholder 'ITEM_INFO' in string value "${ITEM_INFO}"
     一般都是有2处spring的配置文件中都<context:property-placeholder location="classpath:properties/*.properties"/>标签
     

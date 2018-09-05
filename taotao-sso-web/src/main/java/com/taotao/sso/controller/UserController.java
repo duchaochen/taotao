@@ -60,25 +60,26 @@ public class UserController {
         }
         return result;
     }
+
     @RequestMapping(value="/user/token/{token}", method=RequestMethod.GET,
                 //指定返回响应数据的content-type
                 produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
-        @ResponseBody
-        public String getUserByToken(@PathVariable String token, String callback) {
-            TaotaoResult result = userService.getUserByToken(token);
-            //判断是否为jsonp请求
-            if (StringUtils.isNotBlank(callback)) {
-                return callback + "(" + JsonUtils.objectToJson(result) + ");";
-            }
-            return JsonUtils.objectToJson(result);
+    @ResponseBody
+    public String getUserByToken(@PathVariable String token, String callback) {
+        TaotaoResult result = userService.getUserByToken(token);
+        //判断是否为jsonp请求
+        if (StringUtils.isNotBlank(callback)) {
+            return callback + "(" + JsonUtils.objectToJson(result) + ");";
         }
+        return JsonUtils.objectToJson(result);
+    }
 
-    /**
-     * jsonp的第二种方法，spring4.1以上版本使用
-     * @param token
-     * @param callback
-     * @return
-     */
+//    /**
+//     * jsonp的第二种方法，spring4.1以上版本使用
+//     * @param token
+//     * @param callback
+//     * @return
+//     */
 //    @RequestMapping(value="/user/token/{token}", method=RequestMethod.GET)
 //    @ResponseBody
 //    public Object getUserByToken(@PathVariable String token, String callback) {
@@ -92,5 +93,4 @@ public class UserController {
 //        }
 //        return result;
 //    }
-
 }
