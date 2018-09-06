@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="taotao-cart-web:war exploded">
-    <output-path>$PROJECT_DIR$/taotao-cart-web/target/taotao-cart-web</output-path>
+  <artifact type="exploded-war" name="taotao-car-web:war exploded">
+    <output-path>$PROJECT_DIR$/taotao-car-web/target/taotao-car-web</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="taotao-cart-web" />
+          <element id="module-output" name="taotao-car-web" />
         </element>
         <element id="directory" name="lib">
           <element id="archive" name="taotao-common-0.0.1-SNAPSHOT.jar">
@@ -57,9 +57,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/taotao-cart-web/target/taotao-cart-web/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/taotao-car-web/target/taotao-car-web/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="taotao-cart-web/web/Web" />
+      <element id="javaee-facet-resources" facet="taotao-car-web/web/Web" />
     </root>
   </artifact>
 </component>

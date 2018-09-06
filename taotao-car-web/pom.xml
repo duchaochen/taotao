@@ -9,17 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taotao-item-web</artifactId>
+    <artifactId>taotao-car-web</artifactId>
     <packaging>war</packaging>
 
-    <name>taotao-item-web</name>
+    <name>taotao-car-web</name>
     <dependencies>
-        <!-- 单元测试 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>com.taotao</groupId>
             <artifactId>taotao-common</artifactId>
@@ -28,16 +22,6 @@
         <dependency>
             <groupId>com.taotao</groupId>
             <artifactId>taotao-manager-interface</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.taotao</groupId>
-            <artifactId>taotao-content-interface</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.taotao</groupId>
-            <artifactId>taotao-manager-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- Spring -->
@@ -84,7 +68,6 @@
             <artifactId>jsp-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <!-- dubbo相关的jar包 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -108,16 +91,9 @@
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
         </dependency>
-        <!-- Redis客户端 -->
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-
-        <!-- freemarker -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 </project>
