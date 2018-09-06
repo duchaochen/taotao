@@ -18,6 +18,7 @@
         <module>taotao-item-web</module>
         <module>taotao-sso</module>
         <module>taotao-sso-web</module>
+        <module>taotao-cart-web</module>
     </modules>
     <packaging>pom</packaging>
     <!-- 集中定义依赖版本号 -->

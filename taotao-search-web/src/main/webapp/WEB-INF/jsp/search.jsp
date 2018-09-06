@@ -45,7 +45,7 @@
 
 <li class="item-book" bookid="11078102">
 	<div class="p-img">
-		<a target="_blank" href="http://localhst:8086/item/${item.id }.html">
+		<a target="_blank" href="http://localhost:8088/item/${item.id }.html">
 			<img width="160" height="160" data-img="1" data-lazyload="${item.image}" />
 		</a>
 	</div>

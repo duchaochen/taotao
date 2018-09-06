@@ -496,6 +496,11 @@
         /usr/local/src/nginx/sbin/nginx -s reload
 
 
+#腾讯云启动
+/usr/local/src/zookeeper/zookeeper-3.4.6/bin/zkServer.sh start
+/usr/local/src/tomcat/tomcat/bin/startup.sh
+/usr/local/src/redis/redisinstall/bin/redis-server /usr/local/src/redis/redisinstall/bin/redis-server/redis.conf
 
 
-            
+
+
