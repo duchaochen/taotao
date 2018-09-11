@@ -446,7 +446,7 @@
                     #access_log  logs/host.access.log  main;
             
                     location / {
-                        porxy_pass   http://tomcat01;
+                        proxy_pass   http://tomcat01;
                         index  index.html index.htm;
                     }
                 }
@@ -460,7 +460,7 @@
                     #access_log  logs/host.access.log  main;
             
                     location / {
-                        porxy_pass   http://tomcat02;
+                        proxy_pass   http://tomcat02;
                         index  index.html index.htm;
                     }
                 }
@@ -474,7 +474,7 @@
                     #access_log  logs/host.access.log  main;
             
                     location / {
-                        porxy_pass   http://tomcat03;
+                        proxy_pass   http://tomcat03;
                         index  index.html index.htm;
                     }
                 }
