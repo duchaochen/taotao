@@ -1,6 +1,9 @@
 # taotao
 淘淘商城项目所踩到的坑
 
+# 在linux上测试网址
+    命令：curl http://localhost:port
+
 #.html后缀请求出现406错误的话
 
     在springmvc中配置了<url-pattern>*.html</url-pattern>
